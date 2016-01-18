@@ -1,0 +1,53 @@
+Syncano	KEYWORD1
+
+# Classes list
+SyncanoClient	KEYWORD1
+SyncanoResponse	KEYWORD1
+SyncanoChannel	KEYWORD1
+SyncanoClass	KEYWORD1
+SyncanoCodeBox	KEYWORD1
+SyncanoDataObject	KEYWORD1
+SyncanoRequest	KEYWORD1
+SyncanoUtils	KEYWORD1
+SyncanoWebhook	KEYWORD1
+
+# Functions list
+add	KEYWORD2
+details	KEYWORD2
+poll	KEYWORD2
+publish	KEYWORD2
+update	KEYWORD2
+remove	KEYWORD2
+setInstanceName	KEYWORD2
+getApiKey	KEYWORD2
+getInstanceName	KEYWORD2
+getSyncanoClient	KEYWORD2
+initSyncanoClient	KEYWORD2
+JSONencode	KEYWORD2
+JSONpollDecode	KEYWORD2
+JSONdecode	KEYWORD2
+printDetails	KEYWORD2
+setObject	KEYWORD2
+initClass	KEYWORD2
+addField	KEYWORD2
+setField	KEYWORD2
+simpleEnum	KEYWORD2
+initObject	KEYWORD2
+getClassDescription	KEYWORD2
+getFieldCount	KEYWORD2
+getClassName	KEYWORD2
+getFieldName	KEYWORD2
+getFieldIdByFieldName	KEYWORD2
+setFieldValue	KEYWORD2
+getFieldValue	KEYWORD2
+sendRequest	KEYWORD2
+getResponseToString	KEYWORD2
+
+# Library utils functions
+getIntFromJsonDirty	KEYWORD2
+getStringFromJsonDirty	KEYWORD2
+checkExistFromJsonDirty	KEYWORD2
+
+# Free functions list
+SyncanoWebhooksRun	KEYWORD2
+SyncanoCodeBoxRun	KEYWORD2

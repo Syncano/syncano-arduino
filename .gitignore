@@ -1,0 +1,20 @@
+# Logs
+logs
+*.log
+
+# Dependency directory
+node_modules
+
+# Generated documentation
+auto_docs
+
+# Users Environment Variables
+.lock-wscript
+
+auto_docs/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+
+
