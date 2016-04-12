@@ -4,6 +4,8 @@ Arduino library for Syncano provides support for Arduino Yún.
 
 This library let you use Syncano as Cloud for your connected devices.
 
+In case of any questions or feedback, please do not hesitate to contact us on: `#iot` channel at [Syncano-community Slack](https://syncano-community.slack.com/messages/iot/)
+
 ## Getting started
 
 This library is inteded to be used with a [Syncano](https://www.syncano.io/) account. If you don't already have one - you can sign up [here](https://dashboard.syncano.io/?utm_source=github&amp;utm_medium=readme&amp;utm_campaign=syncano-js).
