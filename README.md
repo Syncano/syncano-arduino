@@ -12,8 +12,8 @@ This library is inteded to be used with a [Syncano](https://www.syncano.io/) acc
 
 ### Channels
 
-In order to use Syncano channels properly, you have to create the template in Syncano. Templates can be found in `<> Snippets` section on your dashboard. 
-Name your new template `arduino` and set it's content type to `application/json`. Then just copy the code below into it and save.
+In order to use Syncano channels, you have to create the template in Syncano. Templates can be found in `<> Snippets` section in your dashboard. 
+Name your new template `arduino` and set it content type to `application/json`. Then just copy the code below into it and save.
 ~~~~
 {%- set fields_to_skip = [
 		"group",
