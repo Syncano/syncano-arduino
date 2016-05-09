@@ -54,7 +54,7 @@ bool SyncanoChannel::details(){
 bool SyncanoChannel::poll(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String response = request.sendRequest(F("GET"),client->getInstanceName()+F("/channels/")+this->channelName+F("/poll/"));
+  String response = request.sendRequest(F("GET"),client->getInstanceName()+F("/channels/")+this->channelName+F("/poll/?template_response=arduino"));
   if(response != ""){
     return JSONpollDecode(response);
   }
@@ -92,20 +92,19 @@ String SyncanoChannel::JSONencode(){
 }
 
 bool SyncanoChannel::JSONpollDecode(String & capture){
-  StaticJsonBuffer<400> jsonBuffer;
+  StaticJsonBuffer<200> jsonBuffer;
   JsonObject& root = jsonBuffer.parseObject(capture);
-  JsonObject& payload = root["payload"];
   String keeper;
     if(root.success()){
-      for(int i=0; i< dataObject->masterClass->getFieldCount() ; i++){
+      for(int i=0; i< dataObject->masterClass->getFieldCount() ; i++){        
         keeper = dataObject->masterClass->getFieldName(i);
-        if(payload.containsKey(keeper)){
-          if(payload[keeper].is<float>()){
-            this->dataObject->setFieldValue(keeper,payload[keeper].as<float>());
-          }else if(payload[keeper].is<int>()){
-            this->dataObject->setFieldValue(keeper,payload[keeper].as<int>());
+        if(root.containsKey(keeper)){
+          if(root[keeper].is<float>()){
+            this->dataObject->setFieldValue(keeper,root[keeper].as<float>());
+          }else if(root[keeper].is<int>()){
+            this->dataObject->setFieldValue(keeper,root[keeper].as<int>());           
           }else{
-            this->dataObject->setFieldValue(keeper,payload[keeper].asString());
+            this->dataObject->setFieldValue(keeper,root[keeper].asString());        
           }
         }
       }
