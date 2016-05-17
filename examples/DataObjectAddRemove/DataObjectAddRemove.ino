@@ -27,15 +27,17 @@ void setup() {
 
   // Initialize class, remember that you cannot add new fields after this command
   classHolder->initClass();
-}
 
-void loop() {
   // Create class in Syncano
   classHolder->add();
 
   // Initialize empty local object based on class
   object = classHolder->initObject();
 
+}
+
+void loop() {
+  //Set value in local object
   object->setFieldValue("firstname","john");
   // Create Data Object in Syncano
   object->add();

@@ -118,10 +118,9 @@ String SyncanoDataObject::getFieldValue(String fieldName){
 bool SyncanoDataObject::add(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String id = request.sendRequest("POST",client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/"),JSONencode());
-
-  this->setFieldValue("id",getIntFromJsonDirty(id, "id"));
-  if(this->getFieldValue("id").toInt() >= 0 ){
+  String id = request.sendRequest("POST",client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/?template_response=arduino"),JSONencode());
+  this->setFieldValue("id",(int)id.toInt());
+  if(this->getFieldValue("id").toInt() > 0 ){
     return true;
   }
 
@@ -157,8 +156,8 @@ bool SyncanoDataObject::details(int id){
 bool SyncanoDataObject::update() {
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String response = request.sendRequest("PATCH",client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/")+String(this->getFieldValue("id"))+"/",JSONencode());
-  if(getIntFromJsonDirty(response, "id") >= 0){
+  String response = request.sendRequest("PATCH",client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/")+String(this->getFieldValue("id"))+F("/?template_response=arduino"),JSONencode());
+  if((int)response.toInt() > 0){
     return true;
   }
   else{

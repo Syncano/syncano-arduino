@@ -16,17 +16,23 @@ In order to use Syncano channels, you have to create the template in Syncano. Te
 Name your new template `arduino` and set it content type to `application/json`. Then just copy the code below into it and save.
 ~~~~
 {%- set fields_to_skip = [
-		"group",
-		"group_permissions",
-		"owner_permissions",
-		"other_permissions",
-		"owner",
-		"revision",
-		"updated_at",
-		"created_at"
-	]
+        "group",
+        "group_permissions",
+        "owner_permissions",
+        "other_permissions",
+        "owner",
+        "revision",
+        "updated_at",
+        "created_at"
+    ]
 -%}
-{%- if payload -%}
+{%- if action == 'create' or action =='partial_update' -%}
+    {%- if 'id' in response -%}
+        {{response.id|int()}}
+    {%- else -%}
+        {{-1|int()}}
+    {%- endif -%}
+{%- elif payload -%}
 {
     {%- for key, value in payload.iteritems() if key not in fields_to_skip -%}
         "{{key}}":
@@ -39,7 +45,7 @@ Name your new template `arduino` and set it content type to `application/json`. 
             ,
         {%- endif -%}
     {%- endfor -%}
-}
+}  
 {%- endif -%}
 ~~~~
 

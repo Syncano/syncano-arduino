@@ -7,20 +7,6 @@
 #include <Arduino.h>
 
 /**
- * @fn getIntFromJsonDirty(String JSON, String key)
- * \brief return Int value from Json
- *
- * @param String [JSON] - String in Json format
- * @param String [key] - Field name to search for
- *
- * Example Usage:
- * @code
- *    getIntFromJsonDirty("exampleJson", "exampleFiled")
- * @endcode
- */
-int getIntFromJsonDirty(String &JSON, String key);
-
-/**
  * @fn getStringFromJsonDirty(String JSON, String key)
  * \brief return String value from Json
  *
