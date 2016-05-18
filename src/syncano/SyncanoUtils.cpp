@@ -11,12 +11,3 @@ String getStringFromJsonDirty(String &JSON, String key){
 
   return value;
 }
-
-bool checkExistFromJsonDirty(String &JSON, String key){
-  int end;
-  end = JSON.indexOf("\""+key+"\"");
-  if(end != -1){
-    return true;
-  }
-  return false;
-}

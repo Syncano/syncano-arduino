@@ -60,8 +60,8 @@ void SyncanoClass::initClass(){
 bool SyncanoClass::add(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String response = request.sendRequest(F("POST"),client->getInstanceName()+F("/classes/"),JSONencode());
-  return checkExistFromJsonDirty(response,"status");
+  String response = request.sendRequest(F("POST"),client->getInstanceName()+F("/classes/?template_response=arduino"),JSONencode());
+  return response.toInt() > 0 ? true : false;
 }
 
 bool SyncanoClass::details(){

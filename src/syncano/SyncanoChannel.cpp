@@ -35,8 +35,8 @@ SyncanoChannel::~SyncanoChannel(){
 bool SyncanoChannel::add(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String response = request.sendRequest(F("POST"),client->getInstanceName()+F("/channels/"),JSONencode());
-  return checkExistFromJsonDirty(response,"type");
+  String response = request.sendRequest(F("POST"),client->getInstanceName()+F("/channels/?template_response=arduino"),JSONencode());
+  return response.toInt() > 0 ? true : false;
 }
 
 bool SyncanoChannel::details(){
