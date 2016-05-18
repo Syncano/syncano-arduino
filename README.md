@@ -29,8 +29,10 @@ Name your new template `arduino` and set it content type to `application/json`. 
 {%- if action == 'create' or action =='partial_update' -%}
     {%- if 'id' in response -%}
         {{response.id|int()}}
+    {%- elif 'status' or 'type' in response -%}
+        {{'1'|int()}}
     {%- else -%}
-        {{-1|int()}}
+        {{'0'|int()}}
     {%- endif -%}
 {%- elif payload -%}
 {
