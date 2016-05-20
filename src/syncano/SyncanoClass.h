@@ -34,10 +34,6 @@ class SyncanoClass
    */
   String className;
   /**
-   * @brief   Holds Syncano class description
-   */
-  String classDescription;
-  /**
    * @brief   Holds fields names, used to initialize class
    */
   String holder;
@@ -67,20 +63,6 @@ class SyncanoClass
    */
   SyncanoClass(String incClassName);
   /**
-   * @fn SyncanoClass(String incClassName, String incClassDescription)
-   * \brief Constructor taking class name and description
-   *
-   * @param String [incClassName] - class name
-   * @param String [incClassDescription] - class description
-   *
-   * Example Usage:
-   * @code
-   *   SyncanoClass* sc;
-   *   sc = new SyncanoClass("ClassName","Description");
-   * @endcode
-   */
-  SyncanoClass(String incClassName, String incClassDescription);
-  /**
    * @fn ~SyncanoClass()
    * \brief Default deconstructor
    */
@@ -91,7 +73,7 @@ class SyncanoClass
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   sc->add();
    * @endcode
    */
@@ -102,7 +84,7 @@ class SyncanoClass
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   sc->details();
    *   sc->printDetails();
    * @endcode
@@ -114,7 +96,7 @@ class SyncanoClass
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   sc->remove();
    * @endcode
    */
@@ -144,7 +126,7 @@ class SyncanoClass
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   sc->addField("id");
    *   sc->printDetails();
    * @endcode
@@ -159,7 +141,7 @@ class SyncanoClass
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   sc->addField("string","id");
    *   sc->printDetails();
    * @endcode
@@ -174,7 +156,7 @@ class SyncanoClass
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   sc->addField("string","id");
    *   sc->setField("id","firstname");
    *   sc->printDetails();
@@ -211,30 +193,19 @@ class SyncanoClass
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   sc->addField("string","id");
    *   SyncanoDataObject* object = sc->initObject();
    * @endcode
    */
   SyncanoDataObject* initObject();
   /**
-   * @fn getClassDescription()
-   * \brief Returns local class description
-   *
-   * Example Usage:
-   * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
-   *   String desc = sc->getDescription();
-   * @endcode
-   */
-  String getClassDescription();
-  /**
    * @fn getClassName()
    * \brief Returns local class name
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   String name = sc->getName();
    * @endcode
    */
@@ -245,7 +216,7 @@ class SyncanoClass
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   int count = sc->getFieldCount();
    * @endcode
    */
@@ -258,7 +229,7 @@ class SyncanoClass
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   String fieldName = sc->getFieldName(2);
    * @endcode
    */
@@ -271,18 +242,18 @@ class SyncanoClass
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   int fieldName = sc->getFieldIdByFieldName("firstname");
    * @endcode
    */
   int getFieldIdByFieldName(String fieldName);
   /**
    * @fn printDetails()
-   * \brief Prints class name, description with all fields with types to Serial output
+   * \brief Prints class name with all fields with types to Serial output
    *
    * Example Usage:
    * @code
-   *   SyncanoClass* sc = new SyncanoClass("ClassName","Description");
+   *   SyncanoClass* sc = new SyncanoClass("ClassName");
    *   sc->printDetails();
    * @endcode
    */
