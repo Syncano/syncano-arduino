@@ -10,9 +10,9 @@ In case of any questions or feedback, please do not hesitate to contact us on: `
 
 This library is inteded to be used with a [Syncano](https://www.syncano.io/) account. If you don't already have one - you can sign up [here](https://dashboard.syncano.io/?utm_source=github&amp;utm_medium=readme&amp;utm_campaign=syncano-js).
 
-### Channels
+### Syncano Template
 
-In order to use Syncano channels, you have to create the template in Syncano. Templates can be found in `<> Snippets` section in your dashboard. 
+In order to use Syncano Arduino library, you have to create the template in Syncano. Templates can be found in `<> Snippets` section in your dashboard. 
 Name your new template `arduino` and set it content type to `application/json`. Then just copy the code below into it and save.
 ~~~~
 {%- set fields_to_skip = [
