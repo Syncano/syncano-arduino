@@ -21,6 +21,17 @@ private:
    */
   String instanceName = "";
 public:
+
+  /**
+   * @brief   enumerator for HTTP REST methods
+   */
+  enum class HTTP {
+    GET,
+    POST,
+    PATCH,
+    DELETE
+  };
+
   /**
    * @fn SyncanoClient();
    * \brief Create Syncano Client object
@@ -95,7 +106,6 @@ public:
    * @endcode
    */
   String getInstanceName();
-
 };
 extern SyncanoClient* Syncano;
 /**

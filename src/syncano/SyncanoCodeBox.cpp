@@ -3,11 +3,11 @@
 String SyncanoCodeBoxRun(int codeBoxId){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  return request.sendRequest("POST",client->getInstanceName()+"/codeboxes/"+codeBoxId+"/run/");
+  return request.sendRequest(SyncanoClient::HTTP::POST,client->getInstanceName()+"/codeboxes/"+codeBoxId+"/run/");
 }
 
 String SyncanoCodeBoxRun(int codeBoxId,String JSON){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  return request.sendRequest("POST",client->getInstanceName()+"/codeboxes/"+codeBoxId+"/run/",JSON);
+  return request.sendRequest(SyncanoClient::HTTP::POST,client->getInstanceName()+"/codeboxes/"+codeBoxId+"/run/",JSON);
 }
