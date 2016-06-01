@@ -35,14 +35,14 @@ SyncanoChannel::~SyncanoChannel(){
 bool SyncanoChannel::add(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String response = request.sendRequest(F("POST"),client->getInstanceName()+F("/channels/?template_response=arduino"),JSONencode());
+  String response = request.sendRequest(SyncanoClient::HTTP::POST,client->getInstanceName()+F("/channels/?template_response=arduino"),JSONencode());
   return response.toInt() > 0 ? true : false;
 }
 
 bool SyncanoChannel::details(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String response = request.sendRequest(F("GET"),client->getInstanceName()+F("/channels/")+this->channelName+F("/?fields=name,description"));
+  String response = request.sendRequest(SyncanoClient::HTTP::GET,client->getInstanceName()+F("/channels/")+this->channelName+F("/?fields=name,description"));
   if(response != ""){
     return JSONdecode(response);
   }
@@ -54,7 +54,7 @@ bool SyncanoChannel::details(){
 bool SyncanoChannel::poll(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String response = request.sendRequest(F("GET"),client->getInstanceName()+F("/channels/")+this->channelName+F("/poll/?template_response=arduino"));
+  String response = request.sendRequest(SyncanoClient::HTTP::GET,client->getInstanceName()+F("/channels/")+this->channelName+F("/poll/?template_response=arduino"));
   if(response != ""){
     return JSONpollDecode(response);
   }
@@ -70,13 +70,13 @@ void SyncanoChannel::publish(String fieldName, String fieldValue){
   root.printTo(JSON);
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  request.sendRequest(F("POST"),client->getInstanceName()+F("/channels/")+this->channelName+F("/publish/"),JSON);
+  request.sendRequest(SyncanoClient::HTTP::POST,client->getInstanceName()+F("/channels/")+this->channelName+F("/publish/"),JSON);
 }
 
 void SyncanoChannel::remove(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  request.sendRequest("DELETE",client->getInstanceName()+F("/channels/")+this->channelName+"/");
+  request.sendRequest(SyncanoClient::HTTP::DELETE,client->getInstanceName()+F("/channels/")+this->channelName+"/");
 }
 
 String SyncanoChannel::JSONencode(){

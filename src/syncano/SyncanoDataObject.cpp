@@ -5,19 +5,19 @@ SyncanoClass * masterClass;
 void *operator new( size_t size, void *ptr ){
   return ptr;
 }
- 
+
 void operator delete( void *obj, void *alloc ){
   return;
 }
 
-enum class DataType { 
+enum class DataType {
   NONE,
-  STRING, 
+  STRING,
   INTEGER,
   FLOAT
 };
 
-struct DataHolder{ 
+struct DataHolder{
   DataHolder() {
     currentType = DataType::NONE;
   }
@@ -62,12 +62,12 @@ struct DataHolder{
     float getFloat(){
       if(currentType == DataType::FLOAT) return v_float;
     }
-    
+
     DataType getDataType() {
       return currentType;
     }
 
-  private: 
+  private:
     void destroy() {
       if (currentType == DataType::STRING) {
         v_string.~String();
@@ -118,7 +118,7 @@ String SyncanoDataObject::getFieldValue(String fieldName){
 bool SyncanoDataObject::add(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String id = request.sendRequest("POST",client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/?template_response=arduino"),JSONencode());
+  String id = request.sendRequest(SyncanoClient::HTTP::POST,client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/?template_response=arduino"),JSONencode());
   this->setFieldValue("id",(int)id.toInt());
   if(this->getFieldValue("id").toInt() > 0 ){
     return true;
@@ -142,7 +142,7 @@ bool SyncanoDataObject::details(int id){
       neededFields+=",";
     }
   }
-  String returnedString = request.sendRequest("GET",client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/")+String(id)+F("/?fields=")+neededFields);
+  String returnedString = request.sendRequest(SyncanoClient::HTTP::GET,client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/")+String(id)+F("/?fields=")+neededFields);
   neededFields = "";
 
   if(returnedString != ""){
@@ -156,7 +156,7 @@ bool SyncanoDataObject::details(int id){
 bool SyncanoDataObject::update() {
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String response = request.sendRequest("PATCH",client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/")+String(this->getFieldValue("id"))+F("/?template_response=arduino"),JSONencode());
+  String response = request.sendRequest(SyncanoClient::HTTP::PATCH,client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/")+String(this->getFieldValue("id"))+F("/?template_response=arduino"),JSONencode());
   if((int)response.toInt() > 0){
     return true;
   }
@@ -168,7 +168,7 @@ bool SyncanoDataObject::update() {
 void SyncanoDataObject::remove() {
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  request.sendRequest("DELETE",client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/")+this->getFieldValue("id")+"/");
+  request.sendRequest(SyncanoClient::HTTP::DELETE,client->getInstanceName()+F("/classes/")+masterClass->getClassName()+F("/objects/")+this->getFieldValue("id")+"/");
 
   delete fieldValue;
   fieldValue = new DataHolder [masterClass->getFieldCount()];

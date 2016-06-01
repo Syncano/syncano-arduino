@@ -50,7 +50,7 @@ void SyncanoClass::initClass(){
 bool SyncanoClass::add(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String response = request.sendRequest(F("POST"),client->getInstanceName()+F("/classes/?template_response=arduino"),JSONencode());
+  String response = request.sendRequest(SyncanoClient::HTTP::POST,client->getInstanceName()+F("/classes/?template_response=arduino"),JSONencode());
   return response.toInt() > 0 ? true : false;
 }
 
@@ -58,7 +58,7 @@ bool SyncanoClass::details(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
   String returnedString;
-  returnedString = request.sendRequest(F("GET"),client->getInstanceName()+"/classes/"+this->className+F("/?fields=schema"));
+  returnedString = request.sendRequest(SyncanoClient::HTTP::GET,client->getInstanceName()+"/classes/"+this->className+F("/?fields=schema"));
   if(returnedString != ""){
     return JSONdecode(returnedString);
   }
@@ -70,7 +70,7 @@ bool SyncanoClass::details(){
 void SyncanoClass::remove(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  request.sendRequest(F("DELETE"),client->getInstanceName()+F("/classes/")+this->className+"/");
+  request.sendRequest(SyncanoClient::HTTP::DELETE,client->getInstanceName()+F("/classes/")+this->className+"/");
   if(this->name && this->type){
     while(int i = 0 < fieldCount){
       this->name[i]="";
