@@ -2,7 +2,7 @@
 
 SyncanoRequest::SyncanoRequest(SyncanoClient* client) {
   this->client = client;
-  baseUrl = "https://api.syncano.io/v1/instances/";
+  baseUrl = "https://api.syncano.io/v1.1/instances/";
 }
 
 SyncanoRequest::~SyncanoRequest() {
@@ -38,7 +38,7 @@ String SyncanoRequest::getHTTPtype(SyncanoClient::HTTP httpType){
       return F("POST");
     case SyncanoClient::HTTP::PATCH:
       return F("PATCH");
-    case SyncanoClient::HTTP::DELETE: 
+    case SyncanoClient::HTTP::DELETE:
       return F("DELETE");
   }
 }
