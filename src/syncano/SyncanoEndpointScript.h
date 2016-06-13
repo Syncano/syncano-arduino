@@ -9,7 +9,7 @@
 
 /**
  * @fn SyncanoEndpointScriptRun(String scriptName);
- * \brief Run SyncanoWebhook with script nsme
+ * \brief Run SyncanoWebhook with script name
  *
  * @param String [scriptName] - The script name used to pull data.
  *
