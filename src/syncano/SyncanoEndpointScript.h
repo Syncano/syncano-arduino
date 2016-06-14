@@ -1,5 +1,5 @@
-/*! \file SyncanoWebhook.h
- *  \brief SyncanoWebhook free run function
+/*! \file SyncanoEndpointScript.h
+ *  \brief SyncanoEndpointScript free run function
  */
 #ifndef SYNCANO_ARDUINO_LIBRARY_SYNCANOENDPOINTSCRIPT_H
 #define SYNCANO_ARDUINO_LIBRARY_SYNCANOENDPOINTSCRIPT_H
@@ -9,7 +9,7 @@
 
 /**
  * @fn SyncanoEndpointScriptRun(String scriptName);
- * \brief Run SyncanoWebhook with script name
+ * \brief Run SyncanoEndpointScript with script name
  *
  * @param String [scriptName] - The script name used to pull data.
  *
@@ -21,7 +21,7 @@
 String SyncanoEndpointScriptRun(String scriptName);
 /**
  * @fn SyncanoEndpointScriptRun(String scriptName, String JSON);
- * \brief Run SyncanoWebhook with script name and json data
+ * \brief Run SyncanoEndpointScript with script name and json data
  *
  * @param String [scriptName] - The script name used to pull data.
  * @param String [JSON] - JSON data package based on syncano HTTP API
