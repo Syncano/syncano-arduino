@@ -4,7 +4,6 @@ char * type;
 String * name;
 int fieldCount;
 String className;
-String classDescription;
 String holder;
 
 SyncanoClass::SyncanoClass(){
@@ -12,20 +11,11 @@ SyncanoClass::SyncanoClass(){
   name = 0;
   fieldCount = 0;
   className = "";
-  classDescription = "";
 }
 
 SyncanoClass::SyncanoClass(String incClassName){
   fieldCount = 0;
   className = incClassName;
-  classDescription = "";
-  holder = "$";
-}
-
-SyncanoClass::SyncanoClass(String incClassName, String incClassDescription){
-  fieldCount = 0;
-  className = incClassName;
-  classDescription = incClassDescription;
   holder = "$";
 }
 
@@ -60,15 +50,15 @@ void SyncanoClass::initClass(){
 bool SyncanoClass::add(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  String response = request.sendRequest(F("POST"),client->getInstanceName()+F("/classes/"),JSONencode());
-  return checkExistFromJsonDirty(response,"status");
+  String response = request.sendRequest(SyncanoClient::HTTP::POST,client->getInstanceName()+F("/classes/?template_response=arduino"),JSONencode());
+  return response.toInt() > 0 ? true : false;
 }
 
 bool SyncanoClass::details(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
   String returnedString;
-  returnedString = request.sendRequest(F("GET"),client->getInstanceName()+"/classes/"+this->className+F("/?fields=description,schema"));
+  returnedString = request.sendRequest(SyncanoClient::HTTP::GET,client->getInstanceName()+"/classes/"+this->className+F("/?fields=schema"));
   if(returnedString != ""){
     return JSONdecode(returnedString);
   }
@@ -80,7 +70,7 @@ bool SyncanoClass::details(){
 void SyncanoClass::remove(){
   SyncanoRequest request(getSyncanoClient());
   SyncanoClient* client = getSyncanoClient();
-  request.sendRequest(F("DELETE"),client->getInstanceName()+F("/classes/")+this->className+"/");
+  request.sendRequest(SyncanoClient::HTTP::DELETE,client->getInstanceName()+F("/classes/")+this->className+"/");
   if(this->name && this->type){
     while(int i = 0 < fieldCount){
       this->name[i]="";
@@ -94,7 +84,6 @@ String SyncanoClass::JSONencode(){
   StaticJsonBuffer<250> jsonBuffer;
   JsonObject& root = jsonBuffer.createObject();
   root["name"] = this->className;
-  if(this->classDescription != "")root["description"] = this->classDescription;
   JsonArray& schema = root.createNestedArray("schema");
 
   for ( int i = 0; i < fieldCount; i++ ) {
@@ -114,7 +103,6 @@ bool SyncanoClass::JSONdecode(String capture){
 
   if(root.success() && root.containsKey("schema")){
     holder = "";
-    this->classDescription = root["description"].asString();
     fieldCount = root["schema"].size();
 
     if(fieldCount>0){
@@ -135,21 +123,13 @@ bool SyncanoClass::JSONdecode(String capture){
 
 char SyncanoClass::simpleEnum(String value){
   if(value == "integer") return '1';
-  if(value == "text") return '2';
-  if(value == "boolean") return '3';
-  if(value == "datetime") return '4';
-  if(value == "file") return '5';
-  if(value == "float") return '6';
+  if(value == "float") return '2';
   return '0';
 }
 
 String SyncanoClass::simpleEnum(char value){
   if(value == '1') return "integer";
-  if(value == '2') return "text";
-  if(value == '3') return "boolean";
-  if(value == '4') return "datetime";
-  if(value == '5') return "file";
-  if(value == '6') return "float";
+  if(value == '2') return "float";
   return "string";
 }
 
@@ -166,13 +146,9 @@ void SyncanoClass::addField(String fieldType, String fieldName){
 void SyncanoClass::setField(String oldfieldName, String newfieldName){
   name[getFieldIdByFieldName(oldfieldName)]=newfieldName;
 }
- 
+
 int SyncanoClass::getFieldCount(){
   return fieldCount;
-}
-
-String SyncanoClass::getClassDescription(){
-  return classDescription;
 }
 
 String SyncanoClass::getClassName(){
@@ -204,8 +180,6 @@ void SyncanoClass::printDetails(){
   Serial.println();
   Serial.print(F("Name: "));
   Serial.print(this->className);
-  Serial.print(F(" Desc: "));
-  Serial.print(this->classDescription);
   Serial.print(F(" Fields: "));
   if(fieldCount>0){
     for(int i=0;i<fieldCount;i++){

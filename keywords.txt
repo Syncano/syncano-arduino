@@ -1,15 +1,15 @@
 Syncano	KEYWORD1
 
 # Classes list
-SyncanoClient	KEYWORD1
-SyncanoResponse	KEYWORD1
 SyncanoChannel	KEYWORD1
 SyncanoClass	KEYWORD1
-SyncanoCodeBox	KEYWORD1
+SyncanoClient	KEYWORD1
 SyncanoDataObject	KEYWORD1
+SyncanoEndpointScript	KEYWORD1
 SyncanoRequest	KEYWORD1
+SyncanoResponse	KEYWORD1
+SyncanoScript	KEYWORD1
 SyncanoUtils	KEYWORD1
-SyncanoWebhook	KEYWORD1
 
 # Functions list
 add	KEYWORD2
@@ -44,10 +44,8 @@ sendRequest	KEYWORD2
 getResponseToString	KEYWORD2
 
 # Library utils functions
-getIntFromJsonDirty	KEYWORD2
 getStringFromJsonDirty	KEYWORD2
-checkExistFromJsonDirty	KEYWORD2
 
 # Free functions list
-SyncanoWebhooksRun	KEYWORD2
-SyncanoCodeBoxRun	KEYWORD2
+SyncanoEndpointScriptRun	KEYWORD2
+SyncanoScriptRun	KEYWORD2

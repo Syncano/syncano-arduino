@@ -10,6 +10,47 @@ In case of any questions or feedback, please do not hesitate to contact us on: `
 
 This library is inteded to be used with a [Syncano](https://www.syncano.io/) account. If you don't already have one - you can sign up [here](https://dashboard.syncano.io/?utm_source=github&amp;utm_medium=readme&amp;utm_campaign=syncano-js).
 
+### Syncano Template
+
+In order to use Syncano Arduino library, you have to create the template in Syncano. Templates can be found in `<> Snippets` section in your dashboard. 
+Name your new template `arduino` and set it content type to `application/json`. Then just copy the code below into it and save.
+~~~~
+{%- set fields_to_skip = [
+        "group",
+        "group_permissions",
+        "owner_permissions",
+        "other_permissions",
+        "owner",
+        "revision",
+        "updated_at",
+        "created_at"
+    ]
+-%}
+{%- if action == 'create' or action =='partial_update' -%}
+    {%- if 'id' in response -%}
+        {{response.id|int()}}
+    {%- elif 'status' or 'type' in response -%}
+        {{'1'|int()}}
+    {%- else -%}
+        {{'0'|int()}}
+    {%- endif -%}
+{%- elif payload -%}
+{
+    {%- for key, value in payload.iteritems() if key not in fields_to_skip -%}
+        "{{key}}":
+        {%- if value is number -%}
+            {{value}}
+        {%- else -%}
+            "{{value}}"
+        {%- endif -%}
+        {%- if not loop.last -%}
+            ,
+        {%- endif -%}
+    {%- endfor -%}
+}  
+{%- endif -%}
+~~~~
+
 ### Installation
 
 To use this library copy folder SyncanoArduinoLibrary from [GitHub](https://github.com/Syncano/syncano-arduino/archive/master.zip) to your Custom Arduino Library Folder.
